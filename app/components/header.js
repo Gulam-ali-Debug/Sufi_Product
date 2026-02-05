@@ -1,8 +1,30 @@
 'use client';
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navLinks = [
+  { href: "/collection", label: "Collections" },
+  { href: "/essence", label: "Essences" },
+  { href: "/", label: "ATTAR", isCenter: true },
+  { href: "/heritage", label: "Heritage" },
+  { href: "/contact", label: "Contact" },
+];
+
 const Header = () => {
+  const pathname = usePathname();
+
+  // To match "/" to home and highlight ATTAR when home
+  // For "/essence", "/heritage", "/collection", "/contact" we highlight respective links
+  const isActive = (href) => {
+    // Center ATTAR is only "active" on "/"
+    if (href === "/") return pathname === "/";
+    // All others: exact match to href
+    return pathname === href;
+  };
+
   return (
-    <header className="fixed top-0 z-50 w-full bg-white border-b border-[#e6e6e6]">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-[#e6e6e6]">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Expanded header height */}
         <div className="flex h-28 items-center justify-between">
@@ -17,48 +39,45 @@ const Header = () => {
           {/* Navigation Items - Centered */}
           <nav className="absolute left-1/2 transform -translate-x-1/2">
             <ul className="flex items-center space-x-10">
-              <li>
-                <a 
-                  href="#" 
-                  className="text-black/90 hover:text-black transition-colors duration-300 font-bold tracking-wide text-sm uppercase"
-                >
-                  <span className="font-bold">Collections</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  className="text-black/90 hover:text-black transition-colors duration-300 font-bold tracking-wide text-sm uppercase"
-                >
-                  <span className="font-bold">Essences</span>
-                </a>
-              </li>
-              <li className="relative">
-                {/* Decorative element for center */}
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-gradient-to-r from-transparent via-black to-transparent" />
-                <a 
-                  href="#" 
-                  className="text-black hover:text-black/70 transition-colors duration-300 font-serif text-lg tracking-widest font-bold"
-                >
-                  <span className="font-bold">ATTAR</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  className="text-black/90 hover:text-black transition-colors duration-300 font-bold tracking-wide text-sm uppercase"
-                >
-                  <span className="font-bold">Heritage</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  className="text-black/90 hover:text-black transition-colors duration-300 font-bold tracking-wide text-sm uppercase"
-                >
-                  <span className="font-bold">Contact</span>
-                </a>
-              </li>
+              {navLinks.map((navItem, idx) => {
+                const isCenter = !!navItem.isCenter;
+                return (
+                  <li
+                    key={navItem.href}
+                    className={`relative${isCenter ? " " : ""}`}
+                  >
+                    {/* Decorative line for ATTAR ONLY when home selected */}
+                    {isCenter && isActive(navItem.href) && (
+                      <div
+                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent"
+                      />
+                    )}
+                    {/* Regular decorative line for other active navs */}
+                    {!isCenter && isActive(navItem.href) && (
+                      <div
+                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent"
+                      />
+                    )}
+                    {/* Center decorative gradient for ATTAR when NOT home (subtle, not a black line) */}
+                    {isCenter && !isActive(navItem.href) && (
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent opacity-0 pointer-events-none" />
+                    )}
+
+                    <Link
+                      href={navItem.href}
+                      className={
+                        isCenter
+                          ? "text-black hover:text-black/70 transition-colors duration-300 font-serif text-lg tracking-widest font-bold"
+                          : "text-black/90 hover:text-black transition-colors duration-300 font-bold tracking-wide text-sm uppercase"
+                      }
+                    >
+                      <span className="font-bold">
+                        {navItem.label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
