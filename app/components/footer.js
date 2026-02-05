@@ -1,7 +1,8 @@
 'use client';
 
-import { FaFacebookF, FaInstagram, FaTwitter, FaPinterestP } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp, FaPinterestP } from 'react-icons/fa';
 import { useState } from 'react';
+import { Facebook, Twitter, Instagram, MessageCircleHeart, Youtube, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   const [language, setLanguage] = useState('English');
@@ -9,18 +10,18 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white pt-16 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Newsletter Section */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <div className="inline-flex items-center justify-center mb-4">
             <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center mr-3">
-              <span className="text-black font-bold text-xl">N</span>
+              <span className="text-black font-bold text-xl">S</span>
             </div>
             <span className="text-white font-bold text-3xl tracking-wider">
-              Noorson Attar
+              Sufi Products Attar
             </span>
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Become a Fragrance Insider!
           </h1>
@@ -30,7 +31,7 @@ const Footer = () => {
           <p className="text-white mb-8 max-w-xl mx-auto font-bold">
             Join our email list for early updates on new collections and exclusive offers!
           </p>
-          
+
           <div className="max-w-md mx-auto mb-8">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
@@ -48,7 +49,7 @@ const Footer = () => {
               </button>
             </div>
           </div>
-          
+
           <hr className="border-white mb-8" />
         </div>
 
@@ -62,7 +63,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {['Attar', 'Oud Attar', 'Floral Attar', 'Musk Attar', 'Mega Pack', 'Bakhoor', 'Car Decor'].map((item) => (
                 <li key={item}>
-                  <a 
+                  <a
                     href="#"
                     className="text-white font-bold block"
                   >
@@ -118,8 +119,8 @@ const Footer = () => {
                 <svg className="w-5 h-5 text-white mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:info@noorson.com" className="text-white font-bold">
-                  info@noorson.com
+                <a href="mailto:info@sufiproducts.com" className="text-white font-bold">
+                  info@sufiproducts.com
                 </a>
               </li>
               <li className="flex items-center">
@@ -163,7 +164,7 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            
+
             <h3 className="text-xl font-bold mb-6 text-white border-l-4 border-white pl-3">
               Secure Payment
             </h3>
@@ -173,7 +174,7 @@ const Footer = () => {
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {['Pay', 'Buy', 'Visa', 'Mastercard'].map((method) => (
-                  <div 
+                  <div
                     key={method}
                     className="bg-black border border-white rounded-lg p-3 flex items-center justify-center"
                   >
@@ -185,16 +186,16 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar - Language Selector and Copyright */}
+        {/* Bottom Bar - Language Selector and social icons */}
         <div className="pt-8 border-t border-white">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* Language Selector */}
-            <div className="mb-4 md:mb-0">
-              <div className="relative">
+            {/* Language Selector (remain on the left/its place) */}
+            <div className="flex flex-col items-center md:flex-row md:items-center mb-4 md:mb-0 gap-4 md:w-1/3 md:justify-start">
+              <div className="relative mb-2 md:mb-0 md:mr-6">
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="appearance-none bg-black border border-white text-white font-bold px-4 py-2 pr-8 rounded-lg focus:outline-none cursor-pointer"
+                  className="appearance-none bg-black text-white px-4 py-2 pr-8 rounded-lg focus:outline-none cursor-pointer"
                 >
                   <option value="English">English</option>
                   <option value="Hindi">Hindi</option>
@@ -208,14 +209,24 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Copyright - Exactly as shown in image */}
-            <div className="text-white text-center">
-              <span className="font-bold">© 2026 Noorson. Designed & Developed by Spider Web Solutions</span>
+            {/* Social Icons Centered */}
+            <div className="flex items-center justify-center gap-[1.5em] text-base md:w-1/3 md:order-none order-last mb-4 md:mb-0">
+              <Facebook size={20} />
+              <Twitter size={20} />
+              <Instagram size={20} />
+              <FaPinterestP size={20} />
+              <Youtube size={20} />
+              <Linkedin size={20} />
+              <FaWhatsapp size={20} />
             </div>
-            
-            {/* Empty div for spacing */}
-            <div className="hidden md:block w-24"></div>
+            {/* Empty div for spacing like before, stays right on desktop */}
+            <div className="hidden md:block w-24 md:w-1/3"></div>
+          </div>
+          {/* Copyright now in a separate div below icons/language selector */}
+          <div className="text-[#e6e6e6] text-center mt-6">
+            <span className="">
+              © 2026 Sufi Products. Designed & Developed by Spider Web Solutions
+            </span>
           </div>
         </div>
       </div>
