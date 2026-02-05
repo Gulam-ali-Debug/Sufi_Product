@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ShoppingBag } from 'lucide-react';
+import { CircleUserRound } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 const navLinks = [
   { href: "/collection", label: "Collections" },
@@ -29,11 +32,13 @@ const Header = () => {
         {/* Expanded header height */}
         <div className="flex h-28 items-center justify-between">
           
-          {/* Logo Only */}
+          {/* Logo */}
           <div className="flex items-center">
-            <div className="h-12 w-12 rounded-full bg-black flex items-center justify-center border border-black/50">
-              {/* Logo only, no text */}
-            </div>
+            <img
+              src="./logo.png"
+              alt="Logo"
+              className="h-20 w-20 object-contain"
+            />
           </div>
 
           {/* Navigation Items - Centered */}
@@ -46,21 +51,11 @@ const Header = () => {
                     key={navItem.href}
                     className={`relative${isCenter ? " " : ""}`}
                   >
-                    {/* Decorative line for ATTAR ONLY when home selected */}
-                    {isCenter && isActive(navItem.href) && (
+                    {/* Show decorative line above ALL active nav items */}
+                    {isActive(navItem.href) && (
                       <div
-                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent"
+                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-gradient-to-r from-transparent via-black to-transparent rounded"
                       />
-                    )}
-                    {/* Regular decorative line for other active navs */}
-                    {!isCenter && isActive(navItem.href) && (
-                      <div
-                        className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent"
-                      />
-                    )}
-                    {/* Center decorative gradient for ATTAR when NOT home (subtle, not a black line) */}
-                    {isCenter && !isActive(navItem.href) && (
-                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 h-1 w-16 from-transparent via-black to-transparent opacity-0 pointer-events-none" />
                     )}
 
                     <Link
@@ -83,20 +78,16 @@ const Header = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-6">
-            <button className="text-black/90 hover:text-black transition-colors duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+            <button className="text-black/90 hover:text-black transition-colors duration-300 cursor-pointer">
+              {/* Replace old search icon with Lucide's Search */}
+              <Search className="w-6 h-6" />
             </button>
-            <button className="text-black/90 hover:text-black transition-colors duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+            <button className="text-black/90 hover:text-black transition-colors duration-300 cursor-pointer">
+              {/* Replace old user icon with Lucide's CircleUserRound */}
+              <CircleUserRound className="w-6 h-6" />
             </button>
-            <button className="relative text-black/90 hover:text-black transition-colors duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+            <button className="relative text-black/90 hover:text-black transition-colors duration-300 cursor-pointer">
+              <ShoppingBag className="w-6 h-6" />
               <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-black text-xs flex items-center justify-center text-white border border-black/50 font-bold">
                 0
               </span>
